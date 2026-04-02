@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Happy Birthday 🎉</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-size: 45px;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { color: white; }
+            to { color: #ff3b2e; }
+        }
+
+        img {
+            width: 200px;
+            border-radius: 50%;
+            margin: 20px;
+            animation: float 3s infinite;
+        }
+        #slide {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px gray;
+            transition: 0.5s;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin: 20px auto;
+            width: 70%;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px gray;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            background: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        button:hover {
+            background: #ff3b2e;
+        }
+
+        /* Popup */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+        }
+
+        .popup-content {
+            background: white;
+            padding: 30px;
+            margin: 15% auto;
+            width: 60%;
+            border-radius: 15px;
+        }
+
+        /* Typing effect */
+        #typing {
+            font-size: 20px;
+            border-right: 2px solid black;
+            display: inline-block;
+            padding-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>🎉 Happy Birthday Gouriiiiiiiiiiiiiiii 🎉</h1>
+
+<img src="https://via.placeholder.com/200">
+<div class="card">
+    <h2>📸 Memories</h2>
+
+    <img id="slide" src="photo1.jpeg">
+
+    <br><br>
+    <button onclick="prevSlide()">⬅️</button>
+    <button onclick="nextSlide()">➡️</button>
+</div>
+
+<div class="card">
+    <p id="typing"></p>
+</div>
+
+<div class="card">
+    <h2>💖 Why You Are Special</h2>
+    <ul style="list-style: none;">
+        <li>😊 Kind & supportive</li>
+        <li>😂 Always makes me laugh</li>
+        <li>🔥 Amazing personality</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>🎶 Play Music</h2>
+    <button onclick="playMusic()">Play Song 🎵</button>
+</div>
+
+<div class="card">
+    <h2>🎁 Click for Surprise</h2>
+    <button onclick="openPopup()">Open Surprise 🎉</button>
+</div>
+
+<!-- Popup -->
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <h2>🎂 Surprise 🎂</h2>
+        <p>You are the best friend ever, my beautiful!, aapki wish jaldi se poori ho joki mai janti hu😉😌🎉</p>
+        <button onclick="closePopup()">Close</button>
+    </div>
+</div>
+
+<!-- Music -->
+<audio id="music">
+    <source src="songs.mpeg" type="audio/mpeg">
+</audio>
+
+<!-- Confetti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+
+/* Typing Effect */
+let text = "🎂 Janmadin mubarak ho! Tu sirf dost nahi, meri life ka sabse khaas hissa hai 💖 Tere saath har din mazedaar aur yaadgaar ban jaata hai 😂🔥 Hamesha khush rehna! Love you yaar ❤️";
+let i = 0;
+function typing() {
+    if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typing, 50);
+    }
+}
+typing();
+
+/* Music */
+function playMusic() {
+    document.getElementById("music").play();
+}
+
+/* Popup */
+function openPopup() {
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("music").play();
+
+    confetti({
+        particleCount: 150,
+        spread: 100,
+        origin: { y: 0.6 }
+    });
+}
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+/* 👇 ADD SLIDESHOW HERE */
+let images = ["photo1.jpeg", "photo2.jpeg", "photo3.jpeg","photo4.jpeg"];
+let index = 0;
+
+function showSlide() {
+    document.getElementById("slide").src = images[index];
+}
+
+function nextSlide() {
+    index = (index + 1) % images.length;
+    showSlide();
+}
+
+function prevSlide() {
+    index = (index - 1 + images.length) % images.length;
+    showSlide();
+}
+showSlide();
+
+setInterval(nextSlide, 3000);
+
+</script>
+
+</body>
+</html>
